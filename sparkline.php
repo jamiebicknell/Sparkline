@@ -7,6 +7,11 @@ Author:     Jamie Bicknell
 Twitter:    @jamiebicknell
 */
 
+function isHex($string)
+{
+    return preg_match('/^#?+[0-9a-f]{3}(?:[0-9a-f]{3})?$/i', $string);
+}
+
 function hexToRgb($hex)
 {
     $hex = ltrim(strtolower($hex), '#');
@@ -16,9 +21,9 @@ function hexToRgb($hex)
 }
 
 $size = isset($_GET['size']) ? str_replace('x', '', $_GET['size']) != '' ? $_GET['size'] : '80x20' : '80x20';
-$back = isset($_GET['back']) ? $_GET['back'] : 'ffffff';
-$line = isset($_GET['line']) ? $_GET['line'] : '1388db';
-$fill = isset($_GET['fill']) ? $_GET['fill'] : 'e6f2fa';
+$back = isset($_GET['back']) ? isHex($_GET['back']) ? $_GET['back'] : 'ffffff' : 'ffffff';
+$line = isset($_GET['line']) ? isHex($_GET['line']) ? $_GET['line'] : '1388db' : '1388db';
+$fill = isset($_GET['fill']) ? isHex($_GET['fill']) ? $_GET['fill'] : 'e6f2fa' : 'e6f2fa';
 $data = isset($_GET['data']) ? explode(',', $_GET['data']) : array();
 
 list($w, $h) = explode('x', $size);
