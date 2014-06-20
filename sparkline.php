@@ -7,6 +7,14 @@ Author:     Jamie Bicknell
 Twitter:    @jamiebicknell
 */
 
+function hexToRgb($hex)
+{
+    $hex = ltrim(strtolower($hex), '#');
+    $hex = isset($hex[3]) ? $hex : $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+    $dec = hexdec($hex);
+    return array(0xFF & ($dec >> 0x10), 0xFF & ($dec >> 0x8), 0xFF & $dec);
+}
+
 $size = isset($_GET['size']) ? str_replace('x', '', $_GET['size']) != '' ? $_GET['size'] : '80x20' : '80x20';
 $back = isset($_GET['back']) ? $_GET['back'] : 'ffffff';
 $line = isset($_GET['line']) ? $_GET['line'] : '1388db';
@@ -91,11 +99,3 @@ header('Cache-Control: max-age=604800, must-revalidate');
 header('Expires: ' . gmdate('D, d M Y H:i:s T', strtotime('+7 days')));
 imagepng($om);
 imagedestroy($om);
-
-function hexToRgb($hex)
-{
-    $hex = ltrim(strtolower($hex), '#');
-    $hex = isset($hex[3]) ? $hex : $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
-    $dec = hexdec($hex);
-    return array(0xFF & ($dec >> 0x10), 0xFF & ($dec >> 0x8), 0xFF & $dec);
-}
