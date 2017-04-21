@@ -96,6 +96,6 @@ PHP script to generate sparklines, with browser cachine with ETag.
     </tr>
 </table>
 
-##License
+## License
 
 Sparkline is licensed under the [MIT license](http://opensource.org/licenses/MIT), see [LICENSE.md](https://github.com/jamiebicknell/Sparkline/blob/master/LICENSE.md) for details.
