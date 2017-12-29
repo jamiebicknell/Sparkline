@@ -36,13 +36,21 @@ $w *= $s;
 $h *= $s;
 $t *= $s;
 
-$salt = 'v1.0.0';
+$salt = 'v1.0.1';
 $hash = md5($salt . $_SERVER['QUERY_STRING']);
 
 $data = (count($data) < 2) ? array_fill(0, 2, $data[0]) : $data;
 $count = count($data);
 $step = $w / ($count - 1);
+
+$min = min($data);
 $max = max($data);
+if ($max != $min) {
+    foreach ($data as $k => $v) {
+        $data[$k] -= $min;
+    }
+    $max = max($data);
+}
 
 if (!extension_loaded('gd')) {
     die('GD extension is not installed');
